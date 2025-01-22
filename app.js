@@ -1,9 +1,10 @@
+
 let d = document;
 let amigos = [];
 
 const $inputAmigo = d.querySelector("#amigo");
 const $listaAmigos = d.querySelector("#listaAmigos")
-
+const $resultado = d.querySelector("#resultado")
 
 // Agregando un evento para accionar el agregar amigo con la tecla Enter
 $inputAmigo.addEventListener("keypress",(e)=>{
@@ -47,4 +48,15 @@ function actualizarListaAmigos(){
         $listaAmigos.innerHTML += `<li>${index + 1}. ${amigos[index]}</li>`;
     }
     // $listaAmigos.append(lista);
+}
+function sortearAmigo(){
+    $resultado.innerHTML = ``;
+    let cantidadAmigos = amigos.length;
+    if(cantidadAmigos <1){
+        alert("No hay amigos para sortear");
+        return;
+    }
+    let indiceAleatorio = Math.floor(Math.random() * cantidadAmigos);
+    $resultado.innerHTML += `<li>El amigo sorteado es ${amigos[indiceAleatorio]} 🏆</li>`;
+    
 }
