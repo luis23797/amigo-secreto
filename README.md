@@ -10,7 +10,14 @@
 </div>
 </div>
 
-[TOC]
+<!-- toc -->
+
+- [Descripcion del proyecto](#descripcion-del-proyecto)
+- [Estado del proyecto](#estado-del-proyecto)
+- [Caracteristicas de la aplicacion](#caracteristicas-de-la-aplicacion)
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+
+<!-- tocstop -->
 
 # Descripcion del proyecto
 Este es un pequeño proyecto que consiste en la codificacion de una pagina web que se encarga de registrar usuarios y realiza un sorteo entre los usuarios que han sido registrados
