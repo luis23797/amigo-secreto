@@ -6,6 +6,8 @@ const $inputAmigo = d.querySelector("#amigo");
 const $listaAmigos = d.querySelector("#listaAmigos")
 const $resultado = d.querySelector("#resultado")
 
+obtenerAmigosStorage();
+
 // Agregando un evento para accionar el agregar amigo con la tecla Enter
 $inputAmigo.addEventListener("keypress",(e)=>{
    if(e.code == 'Enter'){
@@ -24,6 +26,7 @@ function agregarAmigo(){
     // Agregando a la lista de amigos y llamando la funcion para renderizar la lista
     amigos.push(obtenerValorInput());
     actualizarListaAmigos();
+    guardarAmigosStorage();
 }
 function obtenerValorInput(){
     // Obtencion del string contenido en el Input y limpieza del mismo
@@ -46,11 +49,22 @@ function actualizarListaAmigos(){
     // let li = null;
     // Iteracion en cada uno de los elementos de la lista de amigos para añadirlos
     for (let index = 0; index < amigos.length; index++) {
+        console.log("Entro");
         // li = d.createElement("li");
         // li.textContent = amigos[index];
         // lista.append(li);
         $listaAmigos.innerHTML += `<li>${index + 1}. ${amigos[index]}</li>`;
     }
+    if(amigos.length>0){
+        $listaAmigos.innerHTML += `
+    <br>
+                <button class="button-draw" onclick="eliminarAmigosStorage()" aria-label="Eliminar Lista">
+                    X
+                    Eliminar Lista
+                </button>
+    `
+    }
+    $inputAmigo.focus();
     // $listaAmigos.append(lista);
 }
 function sortearAmigo(){
@@ -65,5 +79,25 @@ function sortearAmigo(){
     // Creando el indice y mostrando el resultado por medio del DOM
     let indiceAleatorio = Math.floor(Math.random() * cantidadAmigos);
     $resultado.innerHTML += `<li>El amigo sorteado es ${amigos[indiceAleatorio]} 🏆</li>`;
+    $inputAmigo.focus();
+}
+function obtenerAmigosStorage(){
+    amigos = JSON.parse(localStorage.getItem("amigos"));
+    if(amigos==null){
+        amigos = []
+    }
+    if(amigos.length>0){
+        actualizarListaAmigos();
+    }
+}
+function guardarAmigosStorage(){
+    localStorage.setItem("amigos",JSON.stringify(amigos));
+    console.log(localStorage.getItem("amigos"));
     
+}
+function eliminarAmigosStorage(){
+    localStorage.removeItem("amigos");
+    amigos = [];
+    $resultado.innerHTML = ``;
+    actualizarListaAmigos();
 }
